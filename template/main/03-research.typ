@@ -117,7 +117,8 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
   - Coding is required when the user wants behavior that cannot be expressed through its inspector assets and built-in rules.
 
 + Unity integration:
-  - The package is developed via and for Unity.
+  - Developed as a Unity Asset Store package
+  - Workflow closely tied to Unity concepts.
 
 + Cost and accessibility:
   - Cost: listed for `$79.99`.
@@ -136,52 +137,96 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
 *2. RoomGen:*
 
   + Flexibility in setup and settings:
-  - RoomGen focuses on generating rooms, buildings, modular enteriors, dungeons and dense landscapes from moduler tiles and presets which the user provides.
-  - Setup is based around configurable presets. For setup, a designer creates a preset, assigns tiles and decorative objects, adjusts generation settings. Then the result is generated inside the Unity editor.
+    - RoomGen focuses on generating rooms, buildings,   modular interiors, dungeons and dense landscapes from   modular tiles and presets which the user provides.
+    - Setup is based around configurable presets. A   designer creates a preset, assigns tiles and decorative   objects, adjusts generation settings, and generates the   result inside the Unity editor.
+    - Package allows depth in dungeons via multi-floor  setups, where each floor can use different presets and   settings.
+    - RoomGen exposes many customization options for map  generation like tile weights, object placement   probabilities, object spacing and other spacial   placement settings.
+    - It does not expose an explicit graph-based workflow.
+
+#figure(
+  image("/resources/img/RoomGen_example_dungeon.png", width: 80%),
+  caption: "Dungeon screenshot from RoomGen Unity Asset store page."
+)
+
+#figure(
+  image("/resources/img/RoomGen_example_landscape.png", width: 80%),
+  caption: "Landscape screenshot from RoomGen Unity Asset store page."
+)
 
 + Designer-friendliness:
-  -
+  - Package explicitly designed around ease of use. Package advertises a workflow consisting of preset creation, dragging and dropping tiles and objects within the Unity editor and generating inside the Unity editor.
+  - Basic use does not require coding. Most features are set up inside the Unity editor.
+  - Code required when using RoomGen at runtime. If designers choose to generate dungeons during gameplay, then scripts need to be used to trigger map generation.
 
 + Unity integration:
-  - The package is developed via and for Unity.
+  - Developed as a Unity Asset Store package
+  - Workflow closely tied to Unity concepts.
 
 + Cost and accessibility:
   - Cost: `$39.99`.
   - Listed as a paid Asset Store package.
+  - Compared to other candidate solutions and larger tools which will be inspected later, RoomGen is relatively accessible in cost and ease-of-use.
 
 + Learning curve:
-  - 
+  - Basic workflow for map generation setup is simple because it is based on presets, modular tiles and object placement rules.
+  - Without the use of scripts, maps can only be generated in the Unity editor. For dynamic runtime generation, coding is required.
 
 + Scope of the solution:
-  -
+  - Broader scope than pure dungeon map generation. Aside from dungeon generation, rooms, buildings and landscapes can be generated.
+  - The package is centered around modular room, dungeon, building, landscape creation and variation. Allows designers to create varied sets of assets from prefabs.
+
+
+#pagebreak()
 
 //add source page, documentation link
-*3. EdgarPro:*
+*3. Edgar Pro:*
 
   + Flexibility in setup and settings:
-  - 
+    - Edgar Pro focuses on generating 2D dungeons.
+    - Its generation model consists of handlade room  templates and a graph containing the level structure   description.
+    - The level graph is the central structure. Nodes   represent rooms and edges represent necessary   connections between rooms. The graph describes which  rooms must exist and how rooms should be interconnected.
+    - Rooms can be connected directly or via corridors.
+    - The level graph provides explicit control over  dungeon structure.
+    - The package stitches rooms together, but does not   modify the rooms themselves.
+
+#figure(
+  image("/resources/img/Edgar_Pro_level_graph_editor.png", width: 50%),
+  caption: "Level graph screenshot from Edgar Pro Unity Asset store page."
+)
 
 + Designer-friendliness:
-  -
+  - Visual workflows inside the Unity editor are used to configure level graphs and room templates.
+  - Basic generation setup is performed entirey in the Unity editor.
 
 + Unity integration:
-  - The package is developed via and for Unity.
+  - Developed as a Unity Asset Store package.
+  - Workflow closely tied to Unity concepts.
 
 + Cost and accessibility:
-  - Cost: `$79.99`
-  - 
+  - Cost: `$55`.
+  - Edgar Pro is a paid Unity Asset Store package.
 
 + Learning curve:
-  - 
+  - Edgar Pro makes basic setup approachable. However, a lot of details need to be set up for dungeon generation. For example, room templates, tilemaps, room outlines, door positions, corridor templates, etc.
+  - The level graph facilitates flexible setup, but it requires the user to think in terms of room relationships to generate interesting layouts.
 
 + Scope of the solution:
-  -
+  - Edgar Pro is narrow in scope, but provides user with deep flexibility in its niche.
+
+
+*Broad procedural generation frameworks:*
+
+*Dungeon Architect:*
+
+
 
 == Candidate evaluation
 
 
 
 == Video game examples
+
+
 
 === Games with hexagonal maps
 
