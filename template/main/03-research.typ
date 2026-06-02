@@ -68,9 +68,114 @@ Valid candidates for evaluation found in the asset store:
 
 #linebreak()
 
-*DunGen*
+The 5 listed candidates can be categorized into 2 categories:
 
+#figure(
+  table(
+    columns: (1fr, 1fr),
+    inset: 6pt,
+    align: (left, left),
+    table.header([*Category*], [*Reviewed solutions*]),
 
+    [Room/prefab-based dungeon generators],
+    [DunGen, RoomGen, Edgar Pro],
+
+    [Broad procedural generation frameworks],
+    [Dungeon Architect, Procedural Generation Grid],
+  ),
+  caption: [Categories of reviewed procedural generation solutions],
+) <tab:solution-categories>
+
+- Flexibility in generation setup and settings.
+- Designer-frendliness/code use for setup.
+- Unity integration.
+- Cost and accessibility.
+- Learning curve.
+- How wide or narrow the scope of existing solutions is.
+
+To make the comparison easier to follow, candidates will be compared together by category.
+First, candidates will be reviewed according to categories listed in the previous subsection.
+Then, in the Candidate evaluation subsection, packages will be compared to one another. 
+
+*Room/prefab-based dungeon generators:*
+//add source page, documentation link
+*1. DunGen:*
+
+#figure(
+  image("/resources/img/DunGen_map_example.png", width: 80%),
+  caption: "DunGen map view during the generation process"
+)
+
++ Flexibility in setup and settings:
+  - Node-based room relationship setup allows for easy generation customization. User defines dungeon flows, tile sets, branching paths, locks, keys, object placement rules.
+  - Setup focuses on dungeon-style layouts composed of room prefabs.
+  - Uses a visual dungeon flow graph.
+  - Archetypes consist of one or more tile sets and are used to define behavior for dungeon sections (branching, path straightening, branch caps and branch pruning and so on).
+
++ Designer-friendliness:
+  - The package is designed around Unity editor assets and visual configuration. Little to no coding is required for basic use.
+  - Coding is required when the user wants behavior that cannot be expressed through its inspector assets and built-in rules.
+
++ Unity integration:
+  - The package is developed via and for Unity.
+
++ Cost and accessibility:
+  - Cost: listed for `$79.99`.
+  - Listed as a paid Asset Store package.
+  - More accessible than large professional tools, which will be considered later, but still commercial.
+
++ Learning curve:
+  - Basic setup is approachable, however dungeon flow concepts and tile rules require some learning.
+
++ Scope of the solution:
+  - The package primarily focuses on procedural dungeon generation using connected rooms/tile prefabs.
+  - The scope is relatively narrow. The package aims to provide designers with a flexible dungeon generator, but it also includes assets for generation.
+  - Markets itself as a one-stop-shop for dungeon generation since it includes a generation framework and assets for map generation.
+
+//add source page, documentation link
+*2. RoomGen:*
+
+  + Flexibility in setup and settings:
+  - RoomGen focuses on generating rooms, buildings, modular enteriors, dungeons and dense landscapes from moduler tiles and presets which the user provides.
+  - Setup is based around configurable presets. For setup, a designer creates a preset, assigns tiles and decorative objects, adjusts generation settings. Then the result is generated inside the Unity editor.
+
++ Designer-friendliness:
+  -
+
++ Unity integration:
+  - The package is developed via and for Unity.
+
++ Cost and accessibility:
+  - Cost: `$39.99`.
+  - Listed as a paid Asset Store package.
+
++ Learning curve:
+  - 
+
++ Scope of the solution:
+  -
+
+//add source page, documentation link
+*3. EdgarPro:*
+
+  + Flexibility in setup and settings:
+  - 
+
++ Designer-friendliness:
+  -
+
++ Unity integration:
+  - The package is developed via and for Unity.
+
++ Cost and accessibility:
+  - Cost: `$79.99`
+  - 
+
++ Learning curve:
+  - 
+
++ Scope of the solution:
+  -
 
 == Candidate evaluation
 
