@@ -355,7 +355,7 @@ Most reviewed candidate Uinty packages provided solutions for reasonably narrow-
 
 Most notably, a relationship can be traced in setup generation among the packages. Despite all of the candidates being little-to-no-code solutions, designers still face the prerequisite of learning generation models and which components implement it. Coding is traded for workflows with visual setup inside the Unity editor, but learning the system is required in every case to a varying degree. For the game designers, this means that they still need to familiarize with technical aspects of the system.
 
-Dungeon Architect encompasses significantly more map generation options than the rest of the packages. While it has deep functionality, its feature-richness goes far beyond the scope of the proof-of-concept framework of this thesis. For that reason, it does not serve as a good comparison. But it is worth restating that Dungeon Architect actively uses node-based setup for map/dungeon generation with the ability to have directed graphs, cyclical sections and a plethora of unique ways to connect nodes. The graph structure Dungeon Architect Templates provide is quite flexible. Still, it does not allow to express the map structure 
+Dungeon Architect encompasses significantly more map generation options than the rest of the packages. While it has deep functionality, its feature-richness goes far beyond the scope of the proof-of-concept framework of this thesis. For that reason, it does not serve as a good comparison. But it is worth restating that Dungeon Architect actively uses node-based setup for map/dungeon generation with the ability to have directed graphs, cyclical sections and a plethora of unique ways to connect nodes. The graph structure Dungeon Architect Templates provide is quite flexible. Still, it is limited in expressing the structure hex cell grid generation needs.
 
 Procedural Generation Grid possesses qualities that are very similar to what my requirements describe. Though it uses square cell grids, the generation model is conceptually similar.
 The designer provides prefabs the dungeon generator can use during generation. Then, generation rules are defined by the designer. In short, rules consist of defining how cells can be placed in relation to others.
@@ -380,40 +380,246 @@ Because of Houdini's complexity and lisence pricing, it is the least accessible 
 
 Like Unreal Engine's PCG, Houdini FX is not a suitable platform for the creation of a proof-of-concept framework. The exact same reasons apply -- the platform's feature set is far too broad for my requirements and the system is not accessible enough.
 
+
+#figure(
+  table(
+    columns: (1.4fr, 1fr, 1.7fr, 1.5fr),
+    inset: 6pt,
+    align: (left, left, left, left),
+    table.header(
+      [*Solution*],
+      [*Platform*],
+      [*Main scope*],
+      [*Role in this thesis*],
+    ),
+
+    [DunGen],
+    [Unity],
+    [Dungeon / room-based generation],
+    [Narrow benchmark],
+
+    [Edgar Pro],
+    [Unity],
+    [Dungeon / level generation],
+    [Narrow benchmark],
+
+    [Dungeon Architect],
+    [Unity / Unreal],
+    [Broad dungeon and level generation framework],
+    [Strong but oversized benchmark],
+
+    [Procedural Generation Grid],
+    [Unity],
+    [Grid-based procedural generation],
+    [Closest Unity benchmark],
+
+    [Unreal PCG],
+    [Unreal Engine],
+    [General procedural content framework],
+    [Reference system],
+
+    [Houdini / Houdini Engine],
+    [External tool / Unity integration],
+    [General procedural asset generation],
+    [Reference system],
+  ),
+  caption: [Positioning of reviewed procedural generation solutions],
+) <tab:candidate-positioning>
+
+#figure(
+  table(
+    columns: (1.35fr, 0.9fr, 1fr, 1.1fr, 0.9fr),
+    inset: 5pt,
+    align: (left, center, center, center, center, center),
+    table.header(
+      [*Solution*],
+      [*Unity integration*],
+      [*Hex grid support*],
+      [*Designer-facing workflow*],
+      [*No-code setup*],
+    ),
+
+    [DunGen],
+    [Yes],
+    [No / unclear],
+    [Yes],
+    [Partial],
+
+
+    [Edgar Pro],
+    [Yes],
+    [No / unclear],
+    [Yes],
+    [Partial],
+
+
+    [Dungeon Architect],
+    [Yes],
+    [Possible],
+    [Yes],
+    [Partial],
+
+
+    [Procedural Generation Grid],
+    [Yes],
+    [Partial / closest],
+    [Yes],
+    [Partial],
+
+
+    [Unreal PCG],
+    [No],
+    [Possible with custom work],
+    [Yes],
+    [Partial],
+
+
+    [Houdini Engine],
+    [Partial],
+    [Possible with custom work],
+    [Partial],
+    [No / technical],
+
+  ),
+  caption: [Feature fit of reviewed tools against the thesis scope],
+) <tab:feature-fit>
+
 == Gaps and missing features
 
-Some Unity packages contained node-based logic and workflows and some also used grids for prefab arrangement and map generation. But not a single one of them explicitly supported or carried the notion of being epandable to support hexagonal cells.
-Unity candidates provide flexible, relatively designer-friendly and relatively accessible solutions. Not a single one of them satisfies the requirements for the generation of a grid of gapless hexagonal tiles.
+Some Unity packages contained node-based logic and workflows and some also used grids for prefab arrangement and map generation.
+Unity candidates provide flexible, relatively designer-friendly and relatively accessible solutions. But not a single one of them satisfies the requirements for the generation of a grid of gapless hexagonal tiles.
 
 Unreal Engine PCG and Houdini FX offer capabilities to implement similar generation models.
 For the most part, they do not offer Unity support, require significantly more technical knowledge and are less accessible, with the exception of Unreal Engine's PCG being free.
 These solutions have a significantly smaller gap in missing features for the satisfaction of my requirements, but PCG and Houdini will serve only as reference in this thesis. 
 //core argument I'm trying to make:
 //The reviewed tools show that procedural generation support is available, but existing solutions tend to fall into two groups. Unity Asset Store tools are often accessible but focused on dungeon or prefab-room generation. Broader systems such as Unreal PCG and Houdini provide extensive procedural workflows, but they introduce higher complexity and are not focused on map generation in general, let alone on hexagonal grid-based map generation. This creates a gap for a focused, designer-friendly Unity framework for configurable hexagonal map generation.
+#figure(
+  table(
+    columns: (1.5fr, 1.2fr, 1.7fr),
+    inset: 6pt,
+    align: (left, center, left),
+    table.header(
+      [*Capability*],
+      [*Found in reviewed tools?*],
+      [*Research gap*],
+    ),
 
+    [First-class hexagonal cell grid generation],
+    [No],
+    [Reviewed tools do not directly target the exact map type used in this thesis.],
+
+    [Unity native hex cell grid map generation workflow],
+    [No / limited],
+    [Unity tools mostly focus on dungeons, rooms, terrain, or general grid workflows.],
+
+    [Designer defined graph rewriting rules],
+    [No],
+    [Reviewed tools do not expose generation as designer defined pattern matching and graph transformation.],
+
+    [Focused hex cell grid map scope],
+    [No],
+    [Broader systems can theoretically support this, but they are not designed around this specific use case.],
+
+    [No-code configuration inside Unity Inspector],
+    [Partial],
+    [Some tools expose settings visually, but not for configurable hex cell graph rewriting.],
+
+    [Deterministic hex-map generation for comparison],
+    [Partial],
+    [Repeatable generation may exist, but not in combination with the specific hex-grid rule system proposed here.],
+  ),
+  caption: [Missing features related to the proposed hexagonal map generation scope],
+) <tab:missing-hex-features>
 
 == Video game examples
 
-=== Non-Hexagonal cell grid maps
+
 
 Understanding how games use procedural generation is vital to understanding what solutions developers may run into.
+The video games that will be review below serve as design benchmarks rather than technical competitors. The point is not to answer questions like "Which game has the best generator?"
 
-*Minecraft*
+For this section, the following questions will be used:
 
-//talk about perlin noise and in general how much (or little) control noise maps provide for generation
++ What do successful games expose to users?
++ What kinds of variety do their generators create?
++ Do generated features interact meaningfully?
++ Do any of them use hex cells in a way relevant to this thesis?
 
-*Hades 1 & 2*
+
 
 === Games with hexagonal cell grid maps
 
 
-*Age of Wonders series*
+*Civilization V:*
+
+Civilization V is a turn-based 4X strategy game and one of the most relevant examples for this thesis because its main game map is built from hexagonal tiles. 
+Civilization V introduced hexagonal tiles to the series. 
+This makes the game a useful reference point for evaluating how hexagonal maps support:
++ strategic movement
++ expansion
++ terrain evaluation
++ replayability
+
+Civilization V provides a notable assortment of player-facing setup options. It does not offer low level control over generation.
+Before starting a match, players can choose parameters such as map type, map size, world age, temperature, rainfall, sea level and resource abundance. These options allow the player to influence the generated world without needing to understand the internal generation algorithm.
+
+The generator produces variety in generated maps with the help of interactions of several map features. Terrain, water, mountains, resources, natural wonders, city-state placement, civilization starting positions and expansion space availability all affect the gameplay value of a generated map.
+This depicts that map variety isn't simply tied to changes like map size, shape of the land or adding more features. Generation variety stems from how generated features are arranged and interact with one another. Civilization V game mechanics utilize different possible arrangements of features to create different gameplay scenarios for players, inciting replayability.
+
+A little more about the gameplay -- power dynamics between civilizations can vary, sometimes greatly, because of the map settings. Especially if one or several of the players may get lucky with luxury resource and natural wonder generation. Generation of these strategic points of interest may depend on one another and can be less or more likely depending on the settings. On top of that, the individual abilities civilizations have may allow them to harness such an advantage gained from the map generation to an even further extent. 
+
+Civilization V is a prominent example as its hexagonal map is not only a visual grid. Hex cells are central to movement, combat positioning, city placement, resource access, and territorial expansion. The hex grid is part of the game logic rather than just a display format. This supports the thesis assumption that hexagonal cells are a suitable structure for procedural map generation that creates flexibility in design and gameplay.
+
+However, the game does not provide a reusable generation framework. Its generator is tightly connected to the rules and specific balance of the game. Players can configure high level parameters, but they cannot define their own generation rules or graph transformations. 
+
+In the context of this thesis, Civilization V serves as a design benchmark as it demonstrates the value of hexagonal maps and interacting generated features, but it does not provide the kind of designer configurable Unity framework proposed in this work.
+
+#figure(
+  image("/resources/img/civ5_gameplay_screenshot.png", width: 90%),
+  caption: "Civilization V gameplay screenshot."
+)
+
+*Age of Wonders 4:*
+
+Age of Wonders 4 (AoW 4) is a turn-based 4X strategy game with tactical combat. It is relevant to this thesis because its strategic map uses hexagonal tiles and because its world generation exposes a large number of high level configuration options to the player.
+
+In Aow 4, generated maps and gameplay scenarios are called realms. AoW 4 allows players to shape the generated world through realm traits. These traits can affect geography, climate, inhabitants, special world conditions, and the presence of powerful factions or enemies. The resulting generated map is not only varied spatially, but also thematically and mechanically.
+
+The game creates variety in generated maps through interacting systems. Geography affects movement, expansion, and access to resources. Climate and terrain influence the usability and strategic value of different regions. Inhabitants, hostile enemies, free cities which the player can claim, and special realm modifiers can change how the player approaches the main game mechanics -- exploration, combat, expansion, and diplomacy. Replayability is not created merely by rearranging terrain, enemy placement, free city placement and other features. The game combines different map layout with gameplay systems that respond to the features of the generated world.
+
+The strength of AoW 4 as an example is that its generation is configurable while remaining easy to understand for players. 
+Realm setup options allow players to influence the type of experience they want without making low level generation changes. This is relevant to the proposed framework for the reason that it reinforces the value of exposing generation control through readable, designer facing options.
+
+Hexagonal cells are also important to the gameplay of AoW 4. The hex grid structures movement, exploration, territorial expansion, army positioning, and tactical decision making. Similar to Civilization V, the hexagonal map is not merely a visual representation. Hex tiles directly influence the game's strategic logic and affects how players understand and influence power dynamics between them and their rivals.
+
+Age of Wonders 4 does not provide a reusable procedural generation framework, like AoW 4. Its generation system is deeply tied to the game setting, faction design and various systems. Players have high level control over map properties, but they cannot define custom generation rules or reusable map generation logic.
+
+In the context of this thesis, Age of Wonders 4 serves as a design benchmark for configurable, feature-rich hexagonal map generation. It demonstrates that meaningful procedural variety can come from the interaction of geography, world traits, factions, terrain, and gameplay rules.
+
+#figure(
+  image("/resources/img/aow4_gameplay_screenshot.png", width: 60%),
+  caption: "Age of Wonders 4 gameplay screenshot."
+)
+
+*Heroes of Might and Magic III:*
+
+Heroes of Might and Magic III (HoMM III) is a turn-based strategy game with exploration, resource collection, town development, and tactical combat. It serves this thesis as a comparison point since it separates two different grid use cases: 
+
++ overworld exploration takes place on a square tile adventure map
++ combat takes place on a hexagonal rectangular field
+
+The game shows that grid choice can depend on the type of interaction being represented. On the adventure map, the player navigates terrain, visits buildings, collects resources and interacts with various map objects. These objects are often visually and spatially aligned with a square map structure. Square tiles have the upside of making the adventure map readable and practical for placing buildings, roads, obstacles, and other designer-made objects.
+
+Combat, however, uses a hexagonal grid. Hexagonal cells suit this context well. Tactical positioning, movement range, and attack distance are central to gameplay. As stated in @sec:intro, hexagonal tiles allow for more complexity during gameplay. In the context of HoMM III, more complexity and tactical expression in the combat system. Compared with square cells, hexagons avoid diagonal movement inconsistencies and provide a uniform distances to neighboring tiles. This makes them useful for battle systems where relative position and distance need to be clear.
+
+This distinction is relevant to the thesis as it shows that hexagonal cells are not automatically the best choice for every game map. They are particularly useful when movement, adjacency, and tactical positioning are important for the quality of gameplay. At the same time, square grids may be easier for arranging buildings, rectangular objects, roads, and other various map structures. 
+This supports the thesis decision to focus specifically on hexagonal game maps where the hex grid has gameplay meaning, rather than treating hexes as a universal end-all-be-all replacement for all map types.
+
+In the context of this thesis, HoMM III serves as a contrast benchmark. It shows a successful strategy game that uses hexagonal cells for tactical combat, but not for its main adventure map. This reinforces the idea that the proposed framework should be evaluated in scenarios where hexagonal cells provide clear design value, such as movement, positioning, neighborhood relationships, and tactical or strategic map logic.
 
 
-
-*Heroes of Might and Magic series*
-
-
-
-*Civilization series*
-
+#figure(
+  image("/resources/img/homm3_gameplay_screenshot.png", width: 80%),
+  caption: "Heroes of Might and Magic III combat gameplay screenshot."
+)

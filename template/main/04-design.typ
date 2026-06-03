@@ -9,7 +9,8 @@
 
 == Architecture
 
-
+//state design choices you made for the development of this framework
+//explain why you made those choices
 
 == System diagrams
 
