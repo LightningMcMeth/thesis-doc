@@ -3,7 +3,7 @@
 #pagebreak()
 = #i18n("analysis-title", lang:option.lang) <sec:analysis>
 
-== Research questions and functional requirements
+== Research questions and initial functional requirements
 
 In this chapter, existing procedural generation tools, frameworks, and game examples will be examined in order to identify existing capabilities and which gaps are left open. The research focuses on map generation workflows, designer control, tool accessibility, and support for hexagonal grid-based generation. Observations from the research will be used to derive requirements for the prototype framework.
 
@@ -64,7 +64,7 @@ Valid candidates for evaluation found in the asset store:
 
 === Unity Asset Store map generators
 
-*Important note:* Unity Asset store provides fairly limited ways to aqcuaint yourself with package functionality. Documentation is often unavailable unless the package is purchased, leaving store descriptions, reviews and posts on github/reddit/unity forums as primary sources of information. Most packages do not have expansive manuals, guides and documentation coverage, especially from third parties.
+*Important note:* Unity Asset Store packages often provide limited public documentation before purchase. As a result, the evaluation relies on store descriptions, available documentation, public reviews, and community discussions where official documentation is unavailable.
 
 #linebreak()
 
@@ -78,20 +78,13 @@ The 5 listed candidates can be categorized into 2 categories:
     table.header([*Category*], [*Reviewed solutions*]),
 
     [Room/prefab-based dungeon generators],
-    [DunGen, RoomGen, Edgar Pro],
+    [DunGen, RoomGen, Edgar Pro, Procedural Generation Grid],
 
     [Broad procedural generation frameworks],
-    [Dungeon Architect, Procedural Generation Grid],
+    [Dungeon Architect],
   ),
   caption: [Categories of reviewed procedural generation solutions],
 ) <tab:solution-categories>
-
-- Flexibility in generation setup and settings.
-- Designer-frendliness/code use for setup.
-- Unity integration.
-- Cost and accessibility.
-- Learning curve.
-- How wide or narrow the scope of existing solutions is.
 
 To make the comparison easier to follow, candidates will be compared together by category.
 First, candidates will be reviewed according to categories listed in the previous subsection.
@@ -214,27 +207,213 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
   - Edgar Pro is narrow in scope, but provides user with deep flexibility in its niche.
 
 
+*Procedural Generation Grid:*
+
+  + Flexibility in setup and settings:
+    - Procedural Generation Grid uses grids to define fields and paths for procedural generation.
+    - First grid size and prefabs are defined, then the designer sets up generation rules.
+    - Generation rules handle mutation of the grid via grid modifiers. Designers define rule conditions which have to be true for grid mutation to take place.
+    - Includes a Node Graph system, allowing designers to combine multiple field setups into a larger generation workflow. This makes it possible to compose several grid generation stages into a more complex map generator.
+
+#figure(
+  image("/resources/img/proc_gen_grid_store_example_screenshot.png", width: 80%),
+  caption: "Generated dungeon screenshot from Procedural Generation Grid Unity Asset store page."
+)
+
++ Designer-friendliness:
+  - Package provides visual scripting-like tools for defining its generation workflows. Basic setup is done entirely within the Unity editor with the help of the package's visual tools.
+  - Coding is not required for basic use, but designers are still required to understand rule-based generation, grid modifiers, and other concepts to set up map generation.
+
++ Unity integration:
+  - Developed as a Unity Asset Store package.
+  - Workflow closely tied to Unity concepts.
+
++ Cost and accessibility:
+  - Cost: `$45.99`.
+  - Procedural Generation Grid is a paid Unity Asset Store package.
+  - Price falls within expected range for narrow scope packages which is based on previously reviewed candidates.
+
++ Learning curve:
+  - For the most part the package avoids coding for its workflows. Despite that, the package requires the designer to learn the concepts in its generation model to utilize the flexibility of the map generator.
+
++ Scope of the solution:
+  - Scope is closer to this thesis as it utilizes grid cells and rule-based generation.
+  - Fairly narrow scope, focusing on dungeon-like generation and prefab placement.
+
+
 *Broad procedural generation frameworks:*
 
 *Dungeon Architect:*
 
+  + Flexibility in setup and settings:
+    - The package includes several builder types like, including Grid Flow Builder, Snap Builder, Grid Builder, Snap Grid Flow Builder and City Builder.
+    - The Grid Flow Builder allows designers to create node based dungeon flows with cyclic paths, a variety of ways to connect rooms like teleporters and one-way doors, tilemap-based layouts.
+    - Dungeon Architect provides very high flexibility. Its flexibility comes from supporting many different procedural workflows.
 
+#figure(
+  image("/resources/img/dungeon_architect_3d_templates_screenshot.png", width: 80%),
+  caption: "3D templates screenshot from Dungeon Architect Unity Asset store page."
+)
+
++ Designer-friendliness:
+  - The package provides visual Unity editor tools for most of its systems.
+  - Package comes with many specialized systems
+  - Coding required for advanced customization.
+
++ Unity integration:
+  - Developed as a Unity Asset Store package.
+  - Workflow closely tied to Unity concepts.
+
++ Cost and accessibility:
+  - Cost: `$300`.
+  - Dungeon Architect is a paid Unity Asset Store package.
+  - Comes at a significantly higher price than previous packages but is more feature-rich. At this price point, the package is less accessible for small teams, hobbyists and students.
+
++ Learning curve:
+  - Due to the sheer amount of features and options presented to the designer, the learning curve is high.
+  - Designers have to get aquainted with generation worflows and different builders offered by the package.
+
++ Scope of the solution:
+  - Dungeon Architect's scope is quite wide and feature-rich.
+  - This package could be considered a full procedural generation suite, rather than a map, dungeon or landscape builder.
+  - For this thesis, Dungeon Architect is relevant because it demonstrates mature visual procedural generation in Unity. This package establishes what a wider scope includes.
+
+=== Non-Unity generators
+
+*Unreal Engine 5:*
+
+*Unreal Engine Procedural Content Generation Framework:*
+
++ Flexibility in setup and settings:
+  - Unreal Engine's PCG Framework is a built-in procedural generation toolset for creating procedural content inside Unreal Engine.
+  - Utilizes procedural node graphs that can generate content in the editor and at runtime.
+  - Flexibility stems from a general-purpose graph workflow. Designers express generation rules through connected nodes in a visual graph.
+  - Connections between nodes define order and relationships between operations.
+  - Node operations cover a wide array of features. For example, nodes can generate sets of points, use attributes for filtering, transform points in numerous ways, spawn actors or static meshes and combine these operations in a wide range of scenarios.
+  - This allows the framework to support a wide range of procedural tasks, such as environment population, foliage placement, biome generation, object scattering, spline-based generation, and runtime procedural content.
+  - This framework is tied to Unreal Engine's ecosystem and does not support Unity.
+
++ Designer-friendliness:
+  - PCG provides visual graph tools, making it accessible without traditional scripting for many procedural tasks.
+  - However, designers need to be familiar with Unreal Engine 5, PCG graphs, runtime generation behavior, spatial constraints and the other many concepts that the generation features are composed of.
+
++ Unity integration:
+  - Unreal PCG is not integrated with Unity. It is part of Unreal Engine.
+  - Because this thesis targets a Unity-based framework, Unreal PCG is useful as a point of comparison but not as a direct candidate solution.
+
++ Cost and accessibility:
+  - Free.
+  - The framework is available inside Unreal Engine 5.
+  - Access to the framework comes with adopting Unreal Engine 5.
+
++ Learning curve:
+  - The learning curve is significant for users who are not already familiar with Unreal Engine 5.
+  - For teams already using Unreal, PCG is powerful and accessible. In the context of this thesis, it is used as a point of reference.
+
++ Scope of the solution:
+  - Unreal PCG has a broad scope, providing a solution for many procedural generation-centric problems.
+  - PCG is a demonstration of what mature procedural generation tooling can provide.
+
+*Houdini FX:*
+
+*Houdini FX and Houdini Engine:*
+
++ Flexibility in setup and settings:
+  - Houdini FX is a professional procedural content creation tool based on node networks.
+  - Houdini possesses the most expansive set of feature out of all the candidates. It can be used for procedural modeling, terrain generation, destruction, fluids, cloth, particles, simulations, asset generation, and game content pipelines.
+  - Houdini workflows can be packaged as Houdini Digital Assets, which expose selected parameters to artists or designers.
+  - Through the Houdini Engine, digital assets created inside the engine can be loaded into game engines such as Unity and Unreal Engine, allowing procedural controls to be used inside the engine editors.
+  - This makes Houdini one of most flexible reviewed solution, but its flexibility comes from being a full procedural Digital Content Creation and technical art platform rather than a focused game asset generator, let alone a map or dungeon generator.
+
++ Designer-friendliness:
+  - Houdini can expose simplified controls through Houdini Digital Assets, but creating those assets requires significant technical knowledge.
+  - To create a procedural system, a technical artist must understand Houdini's node workflow, geometry processing, parameters, asset packaging, and possibly scripting.
+  - Therefore Houdini can be designer-friendly for the end user of a prepared asset, but not necessarily for the person building the generator asset itself.
+
++ Unity integration:
+  - Houdini Engine provides a Unity plugin that allows Houdini Digital Assets to be used inside the Unity editor.
+  - The Unity plug-in does not replace Houdini itself. A Houdini Engine, Houdini Core, or Houdini FX license is required to run procedural assets through the plugin.
+
++ Cost and accessibility:
+  - Houdini has free or lower-cost options for non-commercial or indie use, but production use depends on SideFX licensing.
+  - Compared with Unity Asset Store tools, Houdini is less accessible for students or small teams if the goal is only a focused hexagonal map generator.
+  - It also requires learning an additional professional tool outside Unity.
+
++ Learning curve:
+  - The learning curve is very high compared with the reviewed Unity packages.
+  - Houdini is powerful because it exposes low level procedural generation control, but this also means users must understand Houdini Engine concepts.
+
++ Scope of the solution:
+  - Houdini has the broadest scope of all reviewed solutions.
+  - It is capable of producing many types of procedural content, but this makes it excessive for the kinds of relatively specific problems that most reviewed Unity packages solve.
 
 == Candidate evaluation
 
+*Unity packages:*
+
+Most reviewed candidate Uinty packages provided solutions for reasonably narrow-scoped problems, with the exception of Dungeon Architect. DunGen, RoomGen, Edgar Pro, Procedural Generation Grid are focused on allowing game designers to create a map/dungeon for their game. Some offer slighly deeper functionality like multi-layer dungeons or object generation. The scope of these packages loosely resembles the scope of the proof-of-concept framework of this thesis.
+
+Most notably, a relationship can be traced in setup generation among the packages. Despite all of the candidates being little-to-no-code solutions, designers still face the prerequisite of learning generation models and which components implement it. Coding is traded for workflows with visual setup inside the Unity editor, but learning the system is required in every case to a varying degree. For the game designers, this means that they still need to familiarize with technical aspects of the system.
+
+Dungeon Architect encompasses significantly more map generation options than the rest of the packages. While it has deep functionality, its feature-richness goes far beyond the scope of the proof-of-concept framework of this thesis. For that reason, it does not serve as a good comparison. But it is worth restating that Dungeon Architect actively uses node-based setup for map/dungeon generation with the ability to have directed graphs, cyclical sections and a plethora of unique ways to connect nodes. The graph structure Dungeon Architect Templates provide is quite flexible. Still, it does not allow to express the map structure 
+
+Procedural Generation Grid possesses qualities that are very similar to what my requirements describe. Though it uses square cell grids, the generation model is conceptually similar.
+The designer provides prefabs the dungeon generator can use during generation. Then, generation rules are defined by the designer. In short, rules consist of defining how cells can be placed in relation to others.
+The generation model is flexible, making it a suitable example to compare against.
+
+Explicit hexagonal cell support is not mentioned explicitly anywhere. Most packages outright do not support them.
+
+*Non-Unity solutions:*
+
+*Unreal Engine PCG:*
+
+This framework has a broad scope, allowing for versatile generation and covering different use cases. It does not support Unity, so it is not a valid candidate for proof-of-concept implementation. But it serves as a great reference for a full suite of procedural generation tools.
+
+It has the capability to generate hexagonal cell grids, but the functionality of the node operations can still fall short of a standalone solution aimed specifically at hex cell maps.
+
+Unlike solutions offered by the Unity Asset Store, Unreal Engine's PCG required deeper fundamental knowledge of the game engine and generation tools.
+
+*Houdini FX:*
+
+Since Houdini is a Digital Content Creation and technical art platform, this solution has applications ranging outside editor tools and game asset generation. While its wide scope sets Houdini apart from other reviewed solutions, it also sets itself apart due to sheer complexity of the tool. Houdini Assets can be more user friendly and centered around a specific concern, the creation of said assets still requires a lot of technical knowledge.
+Because of Houdini's complexity and lisence pricing, it is the least accessible solution out of all candidates.
+
+Like Unreal Engine's PCG, Houdini FX is not a suitable platform for the creation of a proof-of-concept framework. The exact same reasons apply -- the platform's feature set is far too broad for my requirements and the system is not accessible enough.
+
+== Gaps and missing features
+
+Some Unity packages contained node-based logic and workflows and some also used grids for prefab arrangement and map generation. But not a single one of them explicitly supported or carried the notion of being epandable to support hexagonal cells.
+Unity candidates provide flexible, relatively designer-friendly and relatively accessible solutions. Not a single one of them satisfies the requirements for the generation of a grid of gapless hexagonal tiles.
+
+Unreal Engine PCG and Houdini FX offer capabilities to implement similar generation models.
+For the most part, they do not offer Unity support, require significantly more technical knowledge and are less accessible, with the exception of Unreal Engine's PCG being free.
+These solutions have a significantly smaller gap in missing features for the satisfaction of my requirements, but PCG and Houdini will serve only as reference in this thesis. 
+//core argument I'm trying to make:
+//The reviewed tools show that procedural generation support is available, but existing solutions tend to fall into two groups. Unity Asset Store tools are often accessible but focused on dungeon or prefab-room generation. Broader systems such as Unreal PCG and Houdini provide extensive procedural workflows, but they introduce higher complexity and are not focused on map generation in general, let alone on hexagonal grid-based map generation. This creates a gap for a focused, designer-friendly Unity framework for configurable hexagonal map generation.
 
 
 == Video game examples
 
+=== Non-Hexagonal cell grid maps
 
+Understanding how games use procedural generation is vital to understanding what solutions developers may run into.
 
-=== Games with hexagonal maps
+*Minecraft*
+
+//talk about perlin noise and in general how much (or little) control noise maps provide for generation
+
+*Hades 1 & 2*
+
+=== Games with hexagonal cell grid maps
+
 
 *Age of Wonders series*
 
-== Gaps and missing features
+
+
+*Heroes of Might and Magic series*
 
 
 
-//core argument I'm trying to make:
-//The reviewed tools show that procedural generation support is available, but existing solutions tend to fall into two groups. Unity Asset Store tools are often accessible but focused on dungeon or prefab-room generation. Broader systems such as Unreal PCG and Houdini provide extensive procedural workflows, but they introduce higher complexity and are not focused on map generation in general, let alone on hexagonal grid-based map generation. This creates a gap for a focused, designer-friendly Unity framework for configurable hexagonal map generation.
+*Civilization series*
+

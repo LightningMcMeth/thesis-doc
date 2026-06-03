@@ -31,8 +31,8 @@
   title    : "Capstone Project Template",
   subtitle : "Longer Subtitle",
   author: (
-    name        : "Firstname Lastname",
-    email       : "firstname.lastname@kse.org.ua",
+    name        : "Marko-Oleksandr Hlibovytskyy",
+    email       : "mHlibovytskyy@kse.org.ua",
     degree      : "Bachelor",
     affiliation : "KSE",
     place       : "Kyiv",
@@ -58,8 +58,8 @@
 
 #let professor= (
   affiliation: "KSE",
-  name: "Isaac Newton, PhD",
-  email: "inewton@kse.org.ua",
+  name: "Oleksandr Syrotiuk, PhD",
+  email: "osyrotiuk@kse.org.ua",
 )
 #let expert= (
   affiliation: "Company",
