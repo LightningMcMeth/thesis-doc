@@ -5,7 +5,7 @@
 
 == Background and motivation
 
-Game studios face a persistent challenge: manually created content is expensive, time-consuming, and finite, while players expect large, expansive worlds and replayability.
+Game studios face a persistent challenge: manually created content is expensive, time-consuming, and finite, while the casual player base expects large, expansive worlds and replayability.
 
 #linebreak()
 
@@ -15,12 +15,14 @@ Most obvious cases are generated game worlds.
 A few prominent examples:
 #linebreak()
 
+- No Man's Sky
 - Minecraft
 - Civilization series
 - Heroes of Might and Magic series (HoMM)
 - Age of Wonders
-- Hades 1 & 2
-- And many more
+- Borderlands series
+- Deep Rock Galactic
+- Don't Starve Together
 
 == Problem statement
 
@@ -34,13 +36,13 @@ Problems leading to predictable generation can be succinctly summarized into two
 #table(
   columns: 1,
   stroke: none,
-  [ #warningbox()[Flatness: lack of layers, interactions, and relationships between features.] ],
-  [ #warningbox()[Monotony: insufficient or little variance in generation caused by weak randomization or a limited set of designer-made features.]],
+  [ #warningbox()[*Flatness:* lack of depth, interactions, and connectivity between features.] ],
+  [ #warningbox()[*Monotony:* insufficient variance in generation caused by weak randomization or a limited set of statically-made features.]],
   )
 
 == Research objective and scope
 
-The scope of this thesis was deliberately limited to procedural generation of maps using grids made of hexagons. This limitation exists to avoid an overly broad and vague treatment of procedural generation.
+The scope of this thesis was deliberately limited to procedural generation of maps using grids made of hexagons. This limitation exists to provide a well-defined area of practical application for procedural generation.
 As mentioned above, procedural generation covers many possible applications, therefore attempting to support all of them would make the project difficult to explain, design, and evaluate.
 
 #linebreak()
@@ -50,13 +52,13 @@ This thesis narrows procedural generation to a specific technical setting -- hex
 Object of research -- procedural generation of game maps composed of hexagonal cells, implemented in Unity through graph rewriting.
 
 In this proof-of-concept a graph is defined as:
-- Vertex -- hexagonal cell
-- Vertices connected via edges are considered neighbors
-- Graph structure -- grid gapless hexagonal tiles.
+- *Vertex --* hexagonal cell.
+- *Neighbors --* vertices connected via edges.
+- *Graph structure --* grid gapless hexagonal tiles.
 
 Generation process:
 + Generation rules look for patterns defined by designers
-+ If pattern matches exist, the graph is rewritten according to the designer-defined active rule
++ If pattern matches, the graph is rewritten according to the designer-defined active rule
 
 Reasoning behind hexagonal cells:
 + Enough examples exist for evaluation in strategy/tactical/puzzle games.

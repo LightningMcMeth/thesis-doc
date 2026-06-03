@@ -13,7 +13,7 @@ Research questions:
 + To what extent do existing tools support hexagonal grid-based map generation?
 + What gaps in existing tools justify the development of a focused Unity framework for hexagonal map generation using graph rewriting?
 + How do existing video games use procedural generation for map variety and feature-richness and what generation options are exposed to players or designers?
-Based on the thesis scope defined in @sec:intro, the framework should satisfy the following functional requirements:
+Based on the thesis scope defined in @sec:intro and the following research, the framework should satisfy the following functional requirements:
 
 #figure(
   table(
@@ -584,16 +584,16 @@ In the context of this thesis, Civilization V serves as a design benchmark as it
 
 Age of Wonders 4 (AoW 4) is a turn-based 4X strategy game with tactical combat. It is relevant to this thesis because its strategic map uses hexagonal tiles and because its world generation exposes a large number of high level configuration options to the player.
 
-In Aow 4, generated maps and gameplay scenarios are called realms. AoW 4 allows players to shape the generated world through realm traits. These traits can affect geography, climate, inhabitants, special world conditions, and the presence of powerful factions or enemies. The resulting generated map is not only varied spatially, but also thematically and mechanically.
+In AoW 4, generated maps and gameplay scenarios are called realms. AoW 4 allows players to shape the generated world through realm traits. These traits can affect geography, climate, inhabitants, special world conditions, and the presence of powerful factions or enemies. The resulting generated map is not only varied spatially, but also thematically and mechanically.
 
 The game creates variety in generated maps through interacting systems. Geography affects movement, expansion, and access to resources. Climate and terrain influence the usability and strategic value of different regions. Inhabitants, hostile enemies, free cities which the player can claim, and special realm modifiers can change how the player approaches the main game mechanics -- exploration, combat, expansion, and diplomacy. Replayability is not created merely by rearranging terrain, enemy placement, free city placement and other features. The game combines different map layout with gameplay systems that respond to the features of the generated world.
 
 The strength of AoW 4 as an example is that its generation is configurable while remaining easy to understand for players. 
 Realm setup options allow players to influence the type of experience they want without making low level generation changes. This is relevant to the proposed framework for the reason that it reinforces the value of exposing generation control through readable, designer facing options.
 
-Hexagonal cells are also important to the gameplay of AoW 4. The hex grid structures movement, exploration, territorial expansion, army positioning, and tactical decision making. Similar to Civilization V, the hexagonal map is not merely a visual representation. Hex tiles directly influence the game's strategic logic and affects how players understand and influence power dynamics between them and their rivals.
+Hexagonal cells are also important to the gameplay of AoW 4. The hex grid structures movement, exploration, territorial expansion, army positioning, and tactical decision making. Similar to Civilization V, the hexagonal map is not merely a visual representation. Hex tiles directly influence the game's strategic logic and affect how players understand and influence power dynamics between them and their rivals.
 
-Age of Wonders 4 does not provide a reusable procedural generation framework, like AoW 4. Its generation system is deeply tied to the game setting, faction design and various systems. Players have high level control over map properties, but they cannot define custom generation rules or reusable map generation logic.
+Age of Wonders 4 does not provide a reusable procedural generation framework, like Civilization V. Its generation system is deeply tied to the game setting, faction design and various systems. Players have high level control over map properties, but they cannot define custom generation rules or reusable map generation logic.
 
 In the context of this thesis, Age of Wonders 4 serves as a design benchmark for configurable, feature-rich hexagonal map generation. It demonstrates that meaningful procedural variety can come from the interaction of geography, world traits, factions, terrain, and gameplay rules.
 
@@ -607,11 +607,11 @@ In the context of this thesis, Age of Wonders 4 serves as a design benchmark for
 Heroes of Might and Magic III (HoMM III) is a turn-based strategy game with exploration, resource collection, town development, and tactical combat. It serves this thesis as a comparison point since it separates two different grid use cases: 
 
 + overworld exploration takes place on a square tile adventure map
-+ combat takes place on a hexagonal rectangular field
++ combat takes place on a hexagonal combat grid
 
 The game shows that grid choice can depend on the type of interaction being represented. On the adventure map, the player navigates terrain, visits buildings, collects resources and interacts with various map objects. These objects are often visually and spatially aligned with a square map structure. Square tiles have the upside of making the adventure map readable and practical for placing buildings, roads, obstacles, and other designer-made objects.
 
-Combat, however, uses a hexagonal grid. Hexagonal cells suit this context well. Tactical positioning, movement range, and attack distance are central to gameplay. As stated in @sec:intro, hexagonal tiles allow for more complexity during gameplay. In the context of HoMM III, more complexity and tactical expression in the combat system. Compared with square cells, hexagons avoid diagonal movement inconsistencies and provide a uniform distances to neighboring tiles. This makes them useful for battle systems where relative position and distance need to be clear.
+Combat, however, uses a hexagonal grid. Hexagonal cells suit this context well. Tactical positioning, movement range, and attack distance are central to gameplay. As stated in @sec:intro, hexagonal tiles provide more neighboring directions than square tiles without introducing diagonal distance inconsistencies. In the context of HoMM III, hexagonal tiles facilitate more complexity and tactical expression in the combat system. Compared with square cells, hexagons avoid diagonal movement inconsistencies and provide uniform distances to neighboring tiles. This makes them useful for battle systems where relative position and distance need to be clear.
 
 This distinction is relevant to the thesis as it shows that hexagonal cells are not automatically the best choice for every game map. They are particularly useful when movement, adjacency, and tactical positioning are important for the quality of gameplay. At the same time, square grids may be easier for arranging buildings, rectangular objects, roads, and other various map structures. 
 This supports the thesis decision to focus specifically on hexagonal game maps where the hex grid has gameplay meaning, rather than treating hexes as a universal end-all-be-all replacement for all map types.
@@ -623,3 +623,30 @@ In the context of this thesis, HoMM III serves as a contrast benchmark. It shows
   image("/resources/img/homm3_gameplay_screenshot.png", width: 80%),
   caption: "Heroes of Might and Magic III combat gameplay screenshot."
 )
+
+
+#figure(
+  table(
+    columns: (1.2fr, 2fr, 2fr),
+    inset: 6pt,
+    align: (left, left, left),
+    table.header(
+      [*Example*],
+      [*Relevant observation*],
+      [*Value for this thesis*],
+    ),
+
+    [*Civilization V*],
+    [High-level map settings influence terrain, resources, climate, sea level, world shape, and starting conditions.],
+    [Shows how player-facing generation settings can create varied strategic scenarios on a hexagonal map.],
+
+    [*Age of Wonders 4*],
+    [Realm traits expose high-level control over geography, climate, inhabitants, world conditions, and major powers.],
+    [Shows how layered generation settings can create thematic and mechanical variety without exposing low-level algorithms.],
+
+    [*Heroes of Might and Magic III*],
+    [The game uses a square adventure map but switches to a hexagonal grid for tactical combat.],
+    [Shows that hexagonal cells are especially valuable when movement, adjacency, positioning, and attack distance are central to gameplay.],
+  ),
+  caption: [Value of selected game examples for the thesis],
+) <tab:game-example-value>
