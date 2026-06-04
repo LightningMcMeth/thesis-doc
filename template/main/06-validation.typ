@@ -9,7 +9,7 @@
 
 To validate the framework, an example for a game using this framework was created. The example game emphasises the infuence generation has on gameplay decisions made by players.
 
-The validation scenario is a survival strategy game played on a procedurally generated hex grid map. The player must defend ancient towers while an expanding desert gradually spreads from existing sand regions. The quality of the generated map directly affects the quality of the game, because terrain properties determine where sand can spread, where the player can move, where resources can be collected, and how defensible each tower is.
+The validation scenario is a strategy game played on a procedurally generated hex grid map. The player must defend ancient towers while an expanding desert gradually spreads from existing sand regions. The quality of the generated map directly affects the quality of the game, because terrain properties determine where sand can spread, where the player can move, where resources can be collected, and how defensible each tower is.
 
 This example game for validation will be reffered to as "It consumes."
 
@@ -151,8 +151,6 @@ The initial sand region is located in the lower right part of the map. It starts
 
 Compared with example 1, mountains are less consistently useful as defensive barriers. Some mountain cells appear near tower regions, but they do not form reliable chokepoints, thus the player cannot rely solely on mountains. Mountains can be used in conjunction with forests and snow cells to create chokepoints and slow sand spread.
 
-//end by showing how this validation test maps to your requirements (how it satisfies them)
-
 === Satisfaction of requirements
 
 The It consumes validation scenario shows how the framework satisfies the functional and non-functional requirements defined in the design section. The validation does not claim that the framework is a complete production-ready game system. Instead, it demonstrates that the generated maps can support a concrete gameplay scenario where generated cell properties affect player decisions.
@@ -209,8 +207,6 @@ A stronger validation method involves implementing the game rules as a playable 
 The validation supports the feasibility of the framework, but should be treated as preliminary.
 
 == System limitations
-
-=== System limitations
 
 The framework has several limitations that reflect its proof-of-concept scope. It demonstrates designer-configurable hex map generation, but it is not a complete production-ready procedural generation package.
 
