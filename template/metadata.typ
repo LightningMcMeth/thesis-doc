@@ -28,11 +28,11 @@
 // Metadata of the document
 //
 #let doc= (
-  title    : "Capstone Project Template",
-  subtitle : "Longer Subtitle",
+  title    : "Procedural generation of game maps using graph rewriting",
+  subtitle : "",
   author: (
     name        : "Marko-Oleksandr Hlibovytskyy",
-    email       : "mHlibovytskyy@kse.org.ua",
+    email       : "mhlibovytskyy@kse.org.ua",
     degree      : "Bachelor",
     affiliation : "KSE",
     place       : "Kyiv",
