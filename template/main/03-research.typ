@@ -91,12 +91,12 @@ First, candidates will be reviewed according to categories listed in the previou
 Then, in the Candidate evaluation subsection, packages will be compared to one another. 
 
 *Room/prefab-based dungeon generators:*
-//add source page, documentation link
-*1. DunGen:*
+
+*1. DunGen:* @unityDungen @dungenDocs
 
 #figure(
   image("/resources/img/DunGen_map_example.png", width: 80%),
-  caption: "DunGen map view during the generation process"
+  caption: [DunGen map view during the generation process, from the Unity Asset Store page @unityDungen.]
 )
 
 + Flexibility in setup and settings:
@@ -126,8 +126,7 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
   - The scope is relatively narrow. The package aims to provide designers with a flexible dungeon generator, but it also includes assets for generation.
   - Markets itself as a one-stop-shop for dungeon generation since it includes a generation framework and assets for map generation.
 
-//add source page, documentation link
-*2. RoomGen:*
+*2. RoomGen:* @unityRoomGen
 
   + Flexibility in setup and settings:
     - RoomGen focuses on generating rooms, buildings,   modular interiors, dungeons and dense landscapes from   modular tiles and presets which the user provides.
@@ -138,12 +137,12 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
 
 #figure(
   image("/resources/img/RoomGen_example_dungeon.png", width: 80%),
-  caption: "Dungeon screenshot from RoomGen Unity Asset store page."
+  caption: [Dungeon screenshot from the RoomGen Unity Asset Store page @unityRoomGen.]
 )
 
 #figure(
   image("/resources/img/RoomGen_example_landscape.png", width: 80%),
-  caption: "Landscape screenshot from RoomGen Unity Asset store page."
+  caption: [Landscape screenshot from the RoomGen Unity Asset Store page @unityRoomGen.]
 )
 
 + Designer-friendliness:
@@ -171,8 +170,7 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
 
 #pagebreak()
 
-//add source page, documentation link
-*3. Edgar Pro:*
+*3. Edgar Pro:* @unityEdgarPro @edgarDocs
 
   + Flexibility in setup and settings:
     - Edgar Pro focuses on generating 2D dungeons.
@@ -184,7 +182,7 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
 
 #figure(
   image("/resources/img/Edgar_Pro_level_graph_editor.png", width: 50%),
-  caption: "Level graph screenshot from Edgar Pro Unity Asset store page."
+  caption: [Level graph screenshot from the Edgar Pro Unity Asset Store page @unityEdgarPro.]
 )
 
 + Designer-friendliness:
@@ -207,7 +205,7 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
   - Edgar Pro is narrow in scope, but provides user with deep flexibility in its niche.
 
 
-*Procedural Generation Grid:*
+*Procedural Generation Grid:* @unityProceduralGenerationGrid @proceduralGenerationGridManual
 
   + Flexibility in setup and settings:
     - Procedural Generation Grid uses grids to define fields and paths for procedural generation.
@@ -217,7 +215,7 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
 
 #figure(
   image("/resources/img/proc_gen_grid_store_example_screenshot.png", width: 80%),
-  caption: "Generated dungeon screenshot from Procedural Generation Grid Unity Asset store page."
+  caption: [Generated dungeon screenshot from the Procedural Generation Grid Unity Asset Store page @unityProceduralGenerationGrid.]
 )
 
 + Designer-friendliness:
@@ -243,7 +241,7 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
 
 *Broad procedural generation frameworks:*
 
-*Dungeon Architect:*
+*Dungeon Architect:* @unityDungeonArchitect @dungeonArchitectDocs
 
   + Flexibility in setup and settings:
     - The package includes several builder types like, including Grid Flow Builder, Snap Builder, Grid Builder, Snap Grid Flow Builder and City Builder.
@@ -252,7 +250,7 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
 
 #figure(
   image("/resources/img/dungeon_architect_3d_templates_screenshot.png", width: 80%),
-  caption: "3D templates screenshot from Dungeon Architect Unity Asset store page."
+  caption: [3D templates screenshot from the Dungeon Architect Unity Asset Store page @unityDungeonArchitect.]
 )
 
 + Designer-friendliness:
@@ -282,7 +280,7 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
 
 *Unreal Engine 5:*
 
-*Unreal Engine Procedural Content Generation Framework:*
+*Unreal Engine Procedural Content Generation Framework:* @unrealPCG @unrealPCGNodeReference
 
 + Flexibility in setup and settings:
   - Unreal Engine's PCG Framework is a built-in procedural generation toolset for creating procedural content inside Unreal Engine.
@@ -316,7 +314,7 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
 
 *Houdini FX:*
 
-*Houdini FX and Houdini Engine:*
+*Houdini FX and Houdini Engine:* @houdini @houdiniEngineUnity @houdiniBuy
 
 + Flexibility in setup and settings:
   - Houdini FX is a professional procedural content creation tool based on node networks.
@@ -577,7 +575,7 @@ In the context of this thesis, Civilization V serves as a design benchmark as it
 
 #figure(
   image("/resources/img/civ5_gameplay_screenshot.png", width: 90%),
-  caption: "Civilization V gameplay screenshot."
+  caption: "Civilization V gameplay screenshot captured by the author."
 )
 
 *Age of Wonders 4:*
@@ -599,7 +597,7 @@ In the context of this thesis, Age of Wonders 4 serves as a design benchmark for
 
 #figure(
   image("/resources/img/aow4_gameplay_screenshot.png", width: 60%),
-  caption: "Age of Wonders 4 gameplay screenshot."
+  caption: [Age of Wonders 4 gameplay screenshot from Gideon's Gaming @gideonsAgeOfWonders4Review.]
 )
 
 *Heroes of Might and Magic III:*
@@ -621,7 +619,7 @@ In the context of this thesis, HoMM III serves as a contrast benchmark. It shows
 
 #figure(
   image("/resources/img/homm3_gameplay_screenshot.png", width: 80%),
-  caption: "Heroes of Might and Magic III combat gameplay screenshot."
+  caption: [Heroes of Might and Magic III combat gameplay screenshot from MobyGames @mobygamesHomm3Screenshot.]
 )
 
 

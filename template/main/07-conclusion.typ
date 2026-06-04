@@ -26,7 +26,7 @@ The validation chapter depicted that the generated maps satisfy the main require
 - Maps are visible inside the Unity editor.
 
 == Challenges
-
+~
 One major challenge was controlling the scope of procedural generation. Procedural generation can include terrain, dungeons, object scattering, simulations, large worlds, or full content pipelines. Limiting the thesis to hexagonal map generation made the project more focused and allowed the framework to be evaluated through concrete examples.
 
 Another challenge was balancing designer-friendliness with generation flexibility. The framework needed to expose rule configuration through Unity assets and Inspector fields, while still supporting meaningful map transformations. This led to a modular rule structure where rulebooks combine match definitions, prerequisites, match selection policies, and rewrite actions.

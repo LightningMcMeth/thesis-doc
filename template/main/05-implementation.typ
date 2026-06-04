@@ -136,7 +136,7 @@ The component design is implemented through small extension points. The most imp
 
 The grid component stores the hexagonal map in a two-dimensional array. Although a hex grid is not geometrically square, the framework uses offset coordinates so that each cell can still be addressed with an `(x, y)` pair and stored in a regular matrix. In this representation, every other row is horizontally shifted when the grid is materialized, producing the visual hex layout while preserving simple array-based storage.
 
-This approach follows the implementation ideas described in Red Blob Games' hexagonal grid articles, especially the use of offset coordinates for map storage and cube-coordinate conversion for algorithms such as range and distance calculations. The framework uses offset coordinates for storage because they map naturally to a rectangular two-dimensional array, while helper methods can convert to cube coordinates when hex-specific calculations are needed.
+This approach follows the implementation ideas described in Red Blob Games' hexagonal grid articles, especially the use of offset coordinates for map storage and cube-coordinate conversion for algorithms such as range and distance calculations @redBlobHexGrids. The framework uses offset coordinates for storage because they map naturally to a rectangular two-dimensional array, while helper methods can convert to cube coordinates when hex-specific calculations are needed.
 
 In the implementation, `GridRepository` owns the matrix of cells:
 

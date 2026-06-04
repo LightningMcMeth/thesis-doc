@@ -109,7 +109,7 @@ All examples were generated with the same generation settings.
 
 #figure(
   image("/resources/img/map_example1.png", width: 100%),
-  caption: "Screenshot of the generated map example 1."
+  caption: "Screenshot of the generated map example 1 produced by the prototype."
 )
 
 The first generated map contains multiple tower objectives distributed across separate land regions. The initial sand region is located in the lower left part of the map, away from most towers but close enough to connected land that it can become a long term threat.
@@ -124,7 +124,7 @@ This map successfully demonstrates terrain properties can create meaningful defe
 
 #figure(
   image("/resources/img/map_example2.png", width: 100%),
-  caption: "Screenshot of the generated map example 2."
+  caption: "Screenshot of the generated map example 2 produced by the prototype."
 )
 
 
@@ -142,7 +142,7 @@ Unlike the first map, which offers many natural chokepoints this map creates pre
 
 #figure(
   image("/resources/img/map_example3.png", width: 100%),
-  caption: "Screenshot of the generated map example 3."
+  caption: "Screenshot of the generated map example 3 produced by the prototype."
 )
 
 The third generated map contains four tower objectives in a closer arrangement than in example 2. Several towers can potentially be protected through overlapping defensive choices instead of being treated as completely separate parts of the map.

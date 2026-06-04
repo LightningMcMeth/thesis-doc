@@ -26,7 +26,7 @@ A few prominent examples:
 
 == Problem statement
 
-In practice, procedural generation has solved only part of the problem. After repeated play, players may begin to recognize generation patterns.
+In practice, #gls("pcg") has solved only part of the problem. After repeated play, players may begin to recognize generation patterns.
 The moment the player gains a working understanding of the generation system is pivotal to their perception of the game. The interest that draws the players in weakens as the sense of novelty fades.
 
 #linebreak()
@@ -42,7 +42,7 @@ Problems leading to predictable generation can be succinctly summarized into two
 
 == Research objective and scope
 
-The scope of this thesis was deliberately limited to procedural generation of maps using grids made of hexagons. This limitation exists to provide a well-defined area of practical application for procedural generation.
+The scope of this thesis was deliberately limited to procedural generation of maps using grids made of  #glspl("hex-grid"). This limitation exists to provide a well-defined area of practical application for procedural generation.
 As mentioned above, procedural generation covers many possible applications, therefore attempting to support all of them would make the project difficult to explain, design, and evaluate.
 
 #linebreak()
@@ -51,16 +51,16 @@ This thesis narrows procedural generation to a specific technical setting -- hex
 
 Object of research -- procedural generation of game maps composed of hexagonal cells, implemented in Unity through graph rewriting.
 
-In this proof-of-concept a graph is defined as:
-- *Vertex --* hexagonal cell.
-- *Neighbors --* vertices connected via edges.
+In this  #gls("poc") a  #gls("graph") is defined as:
+- *#gls("vertex") --* hexagonal cell.
+- *Neighbors --* vertices connected via #gls("edge").
 - *Graph structure --* grid gapless hexagonal tiles.
 
 Generation process:
 + Generation rules look for patterns defined by designers
 + If pattern matches, the graph is rewritten according to the designer-defined active rule
 
-Reasoning behind hexagonal cells:
+Reasoning behind #glspl("hex-cell"):
 + Enough examples exist for evaluation in strategy/tactical/puzzle games.
 + Map type restriction keeps the topic from becoming too broad.
 + Hexagon-shaped cells allow for more complexity than square cells, which are more common in video games.
