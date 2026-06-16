@@ -138,7 +138,7 @@
   (
     key: "inspector",
     short: "Inspector",
-    long: "Unity Inspector",
+    long: "Unity editor Inspector",
     description: "The Unity editor panel used to view and edit component or asset properties.",
     group: "Unity implementation"
   ),
@@ -176,6 +176,13 @@
     long: "Cellular automata",
     description: "A rule based simulation model where cell states change over time based on neighboring cell states.",
     group: "Validation"
+  ),
+  (
+  key: "mono-behaviour",
+  short: "MonoBehaviour",
+  long: "Unity MonoBehaviour",
+  description: "A Unity base class used for scripts that are attached to GameObjects and participate in Unity scene execution.",
+  group: "Unity Implementation"
   ),
 )
 

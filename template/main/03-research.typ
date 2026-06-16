@@ -26,9 +26,9 @@ Based on the thesis scope defined in @sec:intro and the following research, the 
     [2], [The framework shall allow designers to define map generation rules based on global or local cell patterns.],
     [3], [The framework shall allow designers to define what pattern matches are considered valid candidates for rule transformations.],
     [4], [The framework shall allow rules with matches that are considered valid to transform the grid during map generation.],
-    [5], [The framework shall expose generation configuration inside the Unity editor Inspector window.],
+    [5], [The framework shall expose generation configuration inside the #gls("inspector") window.],
     [6], [The framework shall allow map generation without requiring designers to write little to no code.],
-    [7], [The framework shall support repeatable and stable generation through configurable parameters and seeds, which will guarantee a deterministic result across configurations.],
+    [7], [The framework shall support repeatable and stable generation through configurable parameters and #glspl("seed"), which will guarantee a deterministic result across configurations.],
     [8], [The framework shall provide visual feedback for generated hexagonal maps inside the Unity editor scene view.],
   ),
   caption: [Functional requirements for the proposed framework],
@@ -36,7 +36,7 @@ Based on the thesis scope defined in @sec:intro and the following research, the 
 
 #linebreak()
 
-*Important note:* Although hexagonal grids are common in strategy/tactical, puzzle games, the proof-of-concept framework is not limited strictly to these genres. Genre compatibility serves us in the context of the defined strategy-centric scope rather than being a strict requirement.
+*Important note:* Although hexagonal grids are common in strategy/tactical, puzzle games, the #gls("poc") framework is not limited strictly to these genres. Genre compatibility serves us in the context of the defined strategy-centric scope rather than being a strict requirement.
 
 == Candidate solutions
 
@@ -283,7 +283,7 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
 *Unreal Engine Procedural Content Generation Framework:* @unrealPCG @unrealPCGNodeReference
 
 + Flexibility in setup and settings:
-  - Unreal Engine's PCG Framework is a built-in procedural generation toolset for creating procedural content inside Unreal Engine.
+  - Unreal Engine's #gls("pcg") Framework is a built-in procedural generation toolset for creating procedural content inside Unreal Engine.
   - Utilizes procedural node graphs that can generate content in the editor and at runtime.
   - Flexibility stems from a general-purpose graph workflow. Designers express generation rules through connected nodes in a visual graph.
   - Connections between nodes define order and relationships between operations.
@@ -321,10 +321,10 @@ Then, in the Candidate evaluation subsection, packages will be compared to one a
   - Houdini possesses the most expansive set of feature out of all the candidates. It can be used for procedural modeling, terrain generation, destruction, fluids, cloth, particles, simulations, asset generation, and game content pipelines.
   - Houdini workflows can be packaged as Houdini Digital Assets, which expose selected parameters to artists or designers.
   - Through the Houdini Engine, digital assets created inside the engine can be loaded into game engines such as Unity and Unreal Engine, allowing procedural controls to be used inside the engine editors.
-  - This makes Houdini one of most flexible reviewed solution, but its flexibility comes from being a full procedural Digital Content Creation and technical art platform rather than a focused game asset generator, let alone a map or dungeon generator.
+  - This makes Houdini one of most flexible reviewed solution, but its flexibility comes from being a full procedural #gls("dcc") and technical art platform rather than a focused game asset generator, let alone a map or dungeon generator.
 
 + Designer-friendliness:
-  - Houdini can expose simplified controls through Houdini Digital Assets, but creating those assets requires significant technical knowledge.
+  - Houdini can expose simplified controls through #glspl("hda"), but creating those assets requires significant technical knowledge.
   - To create a procedural system, a technical artist must understand Houdini's node workflow, geometry processing, parameters, asset packaging, and possibly scripting.
   - Therefore Houdini can be designer-friendly for the end user of a prepared asset, but not necessarily for the person building the generator asset itself.
 

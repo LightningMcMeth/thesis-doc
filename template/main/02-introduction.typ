@@ -5,7 +5,7 @@
 
 == Background and motivation
 
-Game studios face a persistent challenge: manually created content is expensive, time-consuming, and finite, while the casual player base expects large, expansive worlds and replayability.
+Game studios face a persistent challenge: manually created content is expensive, time-consuming, and finite, while the casual player base expects large, expansive worlds and replayability  @hendrikxProceduralContentGeneration2013.
 
 #linebreak()
 

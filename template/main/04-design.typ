@@ -7,7 +7,7 @@
 
 The research section identified a gap for a focused Unity framework for designer-configurable hexagonal map generation. This section translates that gap into functional and non-functional requirements for the proposed proof-of-concept.
 
-Functional requirements describe the behavior the framework must provide. They define the core capabilities needed for hexagonal map generation, graph rewriting, designer configuration and deterministic output. 
+Functional requirements describe the behavior the framework must provide. They define the core capabilities needed for hexagonal map generation, #gls("graph-rewriting"), designer configuration and deterministic output. 
 
 Non-functional requirements describe quality constraints that influence the design of the system, such as usability, maintainability, performance, extensibility and scope control.
 
@@ -20,7 +20,7 @@ Because the project is a proof of concept, the requirements prioritize configura
     align: (left, left),
     table.header([*ID*], [*Requirement*]),
 
-    [1], [The framework shall produce a game map as a graph of hexagonal cells.],
+    [1], [The framework shall produce a game map as a #gls("graph") of #glspl("hex-cell").],
     [2], [The framework shall allow designers to define map generation rules based on global or local cell patterns.],
     [3], [The framework shall allow designers to define which pattern matches are considered valid candidates for rule transformations.],
     [4], [The framework shall allow rules with valid matches to transform the grid during map generation.],
@@ -56,11 +56,11 @@ Because the project is a proof of concept, the requirements prioritize configura
 == Architecture
 
 The functional and non-functional requirements led to an architecture centered on a modular Unity framework rather than a standalone application or external generation service. Since the goal of the project is to demonstrate designer-configurable hexagonal map generation inside Unity, the system was designed as a framework integrated into the editor, composed of:
- - Unity MonoBehaviour orchestration scripts.
+ - Unity #gls("mono-behaviour") orchestration scripts.
  - ScriptableObject configuration assets.
  - Graph-based generation core.
  - Rule rewriting subsystem.
- - Materialization layer that converts abstract generated data into visible scene objects.
+ - #gls("materialization") layer that converts abstract generated data into visible scene objects.
 
 The requirements influenced the architecture in four main ways. 
 First, the need to represent maps as hexagonal cell graphs required a dedicated graph core that stores grid structure, cell identity, adjacency and properties separately from visual objects. Second, designer-configurable generation required rule structure, definitions for how rules find valid matches for execution, prerequisite conditions for rule and rewrite actions that mutate the grid have a need to be represented as Unity assets editable in the Inspector. 
@@ -73,11 +73,11 @@ Before discussing how the requirements influenced the architecture, it is useful
 
 *Rulebook:*
 
-A rulebook is the main designer-facing generation configuration. It contains an ordered list of rule entries that are executed during generation. Each rule entry describes one possible transformation of the grid. A rule entry does not directly contain all generation logic itself. Instead it combines smaller configurable parts such as a match definition, prerequisite conditions, a match selection policy and a rewrite action.
+A  #gls("rulebook") is the main designer-facing generation configuration. It contains an ordered list of rule entries that are executed during generation. Each #gls("rule-entry") describes one possible transformation of the grid. A rule entry does not directly contain all generation logic itself. Instead it combines smaller configurable parts such as a match definition, prerequisite conditions, a match selection policy and a rewrite action.
 
 *Match definition:*
 
-A match definition describes the cell pattern that a rule is looking for. Pattern matching is the process of scanning the grid and finding cells or regions that satisfy this definition. For example, a match may require an anchor cell (cell that is being considered for a match) with a specific property, a cell adjacent to another property or a cell inside an active subgraph. The result of this process is a set of candidate matches.
+A #gls("match-definition") describes the cell pattern that a rule is looking for. Pattern matching is the process of scanning the grid and finding cells or regions that satisfy this definition. For example, a match may require an #gls("anchor-cell") with a specific property, a cell adjacent to another property or a cell inside an active subgraph. The result of this process is a set of candidate matches.
 
 *Match selection policy:*
 
@@ -85,19 +85,19 @@ A match selection policy determines which valid candidate matches are used by a 
 
 *Prerequisite:*
 
-A prerequisite is an additional condition that must be satisfied before a rule entry can apply its transformation. While a match definition usually describes a local or structural pattern, prerequisites can express broader conditions, such as counts for properties present on the grid, property grid coverage, adjacent property pairs or subgraph selection constraints. This separation allows the framework to distinguish between finding possible locations and deciding whether the rule should run at all.
+A  #gls("prerequisite") is an additional condition that must be satisfied before a rule entry can apply its transformation. While a match definition usually describes a local or structural pattern, prerequisites can express broader conditions, such as counts for properties present on the grid, property grid coverage, adjacent property pairs or subgraph selection constraints. This separation allows the framework to distinguish between finding possible locations and deciding whether the rule should run at all.
 
 *Rewrite action:*
 
-A rewrite action performs the actual modification once a valid match has been selected. Actions can replace an anchor property, place a shapes at an anchor, draw a path between properties, flood fill a subgraph or modify a subgraph in other ways. Actions do not directly manipulate the grid data structure. They use a mutation gateway, which provides controlled operations for painting cells, shapes, paths and subgraph regions.
+A  #gls("rewrite-action") performs the actual modification once a valid match has been selected. Actions can replace an anchor property, place a shapes at an anchor, draw a path between properties, flood fill a subgraph or modify a subgraph in other ways. Actions do not directly manipulate the grid data structure. They use a mutation gateway, which provides controlled operations for painting cells, shapes, paths and subgraph regions.
 
 *Subgraph:*
 
-A subgraph is a region of the grid used to scope generation. Some rules operate over the entire grid, while others operate only within an active subgraph which represents only a part of the whole grid. Subgraphs allow the framework to express higher-level map structures and then apply local transformations inside those structures.
+A #gls("subgraph") is a region of the grid used to scope generation. Some rules operate over the entire grid, while others operate only within an active subgraph which represents only a part of the whole grid. Subgraphs allow the framework to express higher-level map structures and then apply local transformations inside those structures.
 
 *Materialization:*
 
-Materialization is the process of converting the abstract generated grid into visible Unity scene objects. The rewrite system operates on cell properties rather than prefabs. After generation is complete, the materialization layer reads the grid and instantiates the appropriate tile prefabs based on the generated properties. This keeps procedural logic separate from visual presentation.
+Materialization is the process of converting the abstract generated grid into visible Unity scene objects. The rewrite system operates on cell properties rather than prefabs. After generation is complete, the materialization layer reads the grid and instantiates the appropriate tile #glspl("prefab") based on the generated properties. This keeps procedural logic separate from visual presentation.
 
 #text(size: 8.5pt)[
   #table(

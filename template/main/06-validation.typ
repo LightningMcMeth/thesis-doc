@@ -17,7 +17,7 @@ This example game for validation will be reffered to as "It consumes."
 
 + At the start of each turn, the player may place a limited number of defensive cells on eligible map cells. While a defensive cell is active, sand cannot spread onto that cell. Defensive cells are temporary and expire after a small number of turns. The player may place new defensive cells each turn, but the total number of active defensive cells cannot exceed a predefined limit.
 
-+ After the player has placed all available defensive cells or chooses to advance the turn early, the sand spread simulation progresses. Sand expands according to cellular automata rules that depend on neighboring sand cells and the type of target cell. Different terrain types therefore affect how quickly the threat spreads, which routes it can take, and which towers are easiest or hardest to defend.
++ After the player has placed all available defensive cells or chooses to advance the turn early, the sand spread simulation progresses. Sand expands according to #gls("cellular-automata") rules that depend on neighboring sand cells and the type of target cell. Different terrain types therefore affect how quickly the threat spreads, which routes it can take, and which towers are easiest or hardest to defend.
 
 + The objective is to keep at least one tower uncorrupted for a defined number of turns. The game is lost if all towers are corrupted. The game is also lost if sand covers more than a defined percentage of the map.
 

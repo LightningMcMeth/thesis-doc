@@ -9,7 +9,7 @@ The implementation followed an iterative sprint-based development process. The w
 
 == Prototyping
 
-Prototyping was used to gradually test the main ideas behind the framework before expanding them into the final implementation. The process began with finding a practical way to represent hexagonal cells and store them in memory. This led to the use of a two-dimensional grid structure with stable cell identifiers and a separate tracker for cell properties.
+Prototyping was used to gradually test the main ideas behind the framework before expanding them into the final implementation. The process began with finding a practical way to represent #glspl("hex-cell") and store them in memory. This led to the use of a two-dimensional grid structure with stable cell identifiers and a separate tracker for cell properties.
 This was followed by another prototype focused on applying changes to them. Simple transformations were tested first, such as replacing the property of a selected cell. After that, sequential changes to the grid were possible.
 
 The following prototypes tested different kinds of generation rules. The first rules were simple and made trivial local changes, while later rules introduced match definitions, candidate selection and rewrite actions as separate concepts that together compose rules. As the rule system became more stable, additional complexity was added through features that operate on parts of the grid rather than only individual cells.
@@ -36,7 +36,7 @@ The implementation follows Unity-oriented `C#` project standards. The codebase i
 
   [Rule rewriting],
   [`ProcGen.Graph.Rewriting`],
-  [Contains rulebooks, rule entries, match definitions, prerequisites, rewrite actions, rule execution and mutation services.],
+  [Contains #glspl("rulebook"), #glspl("rule-entry"), #glspl("match-definition"), #glspl("prerequisite"), #glspl("rewrite-action"), rule execution and mutation services.],
 
   [Materialization],
   [`ProcGen.Materialization`],
@@ -80,7 +80,7 @@ The implementation follows Unity-oriented `C#` project standards. The codebase i
   [`TryGetProperty`, `TryResolveOutputProperty`, `TryMatch`],
 
   [Unity asset classes],
-  [ScriptableObject classes use names that describe the asset role.],
+  [#gls("scriptable-object") classes use names that describe the asset role.],
   [`GraphTopology`, `HexProperty`, `Rulebook`, `RewriteAction`]
 )
 
@@ -134,7 +134,7 @@ This supports future expansion while keeping the current proof-of-concept implem
 
 The component design is implemented through small extension points. The most important extension points are match definitions and rewrite actions. Match definitions decide whether a rule can target a cell or region. Rewrite actions perform the transformation once a match has been selected.
 
-The grid component stores the hexagonal map in a two-dimensional array. Although a hex grid is not geometrically square, the framework uses offset coordinates so that each cell can still be addressed with an `(x, y)` pair and stored in a regular matrix. In this representation, every other row is horizontally shifted when the grid is materialized, producing the visual hex layout while preserving simple array-based storage.
+The grid component stores the hexagonal map in a two-dimensional array. Although a  #gls("hex-grid") is not geometrically square, the framework uses offset coordinates so that each cell can still be addressed with an `(x, y)` pair and stored in a regular matrix. In this representation, every other row is horizontally shifted when the grid is materialized, producing the visual hex layout while preserving simple array-based storage.
 
 This approach follows the implementation ideas described in Red Blob Games' hexagonal grid articles, especially the use of offset coordinates for map storage and cube-coordinate conversion for algorithms such as range and distance calculations @redBlobHexGrids. The framework uses offset coordinates for storage because they map naturally to a rectangular two-dimensional array, while helper methods can convert to cube coordinates when hex-specific calculations are needed.
 
@@ -219,7 +219,7 @@ public Vector2Int[] GetNeighborOffsets(int x, int y, int distance)
   [Designers assemble rule behavior through serialized Unity assets.]
 )
 
-The base match definition exposes a small contract. Given a query context and an anchor cell, it either produces a valid `RuleMatch` or rejects the anchor. The default `FindMatches` implementation scans the provided anchor search space and calls `TryMatch` for each possible anchor.
+The base match definition exposes a small contract. Given a query context and an  #gls("anchor-cell"), it either produces a valid `RuleMatch` or rejects the anchor. The default `FindMatches` implementation scans the provided anchor search space and calls `TryMatch` for each possible anchor.
 
 ```csharp
 public abstract class MatchDefinition : ScriptableObject, IMatchDefinition
@@ -308,59 +308,81 @@ This implementation style keeps the rule system open for extension. New actions 
 
 === Manual testing
 
-Testing for the proof of concept was performed manually inside the Unity editor. This approach was suitable for the project because the framework is primarily editor-facing and many of its requirements involve designer configuration, visual feedback and interaction with Unity assets. The goal of testing was to confirm that the implemented components worked together correctly across the full generation pipeline. Manual testing focused on feature validation rather than automated coverage metrics. Test cases were created by preparing different topology, property, rulebook and materialization configurations, running generation in the editor and checking both the abstract generation result and the materialized scene output.
-
-Visual inspection was an important part of testing because one of the framework requirements is to provide feedback inside the Unity editor scene view. After generation, the materialized map was inspected to confirm that tile placement, prefab selection, paths, shapes and larger generated regions appeared as intended.
+Testing for the proof of concept was performed manually inside the Unity editor. The goal of testing was to confirm that the implemented components worked together correctly across the full generation pipeline. Manual testing focused on feature validation rather than automated coverage metrics. Test cases were created by preparing different topology, property, rulebook and materialization configurations, running generation in the editor and checking both the abstract generation result and the materialized scene output.
 
 Repeatable seeds were also used as a manual quality assurance tool. By keeping the seed and configuration fixed, the same generated output could be reproduced between runs. This made it easier to compare the effect of individual rule or parameter changes and to confirm that unrelated edits did not unexpectedly change the generation result.
 
-=== Recommended testing strategy
+=== Testing coverage
 
-A more complete version of the framework should include automated unit and integration tests. Below is an explanation for the testing strategy for more complete version of the framework.
+The framework includes a Unity test framework suite. The suite is EditMode only. 
+Tests mainly focus on:
+ + Seeds and random streams.
+ + Grid construction.
+ + Property tracking.
+ + Match definitions.
+ + Prerequisites.
+ + Rewrite actions.
+ + Subgraphs.
+ + Rule execution and end-to-end generation (excluding materialization).
+
+ The test suite includes unit, integration and regression tests for the above mentioned features.
+
+The tests use small in-memory grids and ScriptableObject test assets rather than full Unity scenes.
+Generated grid state is compared directly for test assertion.
+Helpers create test properties, rulebooks, rule entries, random streams and simplified rule execution contexts.
+
+The current suite intentionally does not test materialization, prefab instantiation, scene object creation and MonoBehaviour lifecycle behavior. Generation core is estimated at about 70% test coverage.
 
 #table(
-  columns: (1fr, 1.4fr, 1.4fr),
+  columns: (1fr, 1.6fr, 1.6fr),
   inset: 6pt,
   align: (left, left, left),
-  table.header([*Test level*], [*Purpose*], [*Examples*]),
+  table.header([*Test area*], [*Procedure*], [*Expected result*]),
 
-  [Unit tests],
-  [Verify individual classes and algorithms in isolation.],
-  [Hex neighbor lookup, seed hashing, random stream reproducibility, property tracking, value resolution, prerequisite comparisons.],
+  [Grid construction],
+  [Create small and medium hexagonal grids with known dimensions and inspect generated cell references.],
+  [Every valid coordinate produces one stable cell identifier and can be queried through the graph core.],
 
-  [Integration tests],
-  [Verify that multiple components work together correctly.],
-  [Run a fixed topology and rulebook with a fixed seed, then compare the generated grid properties against an expected result.],
+  [Neighbor lookup],
+  [Select cells in even and odd rows and compare their neighbor positions against the expected offset layout.],
+  [Neighbor relationships match the visual hexagonal layout and do not return cells outside the grid bounds.],
 
-  [Editor tests],
-  [Verify Unity-specific asset and Inspector workflows.],
-  [Check that ScriptableObject assets can be created, serialized, assigned and used by the generation runner.],
+  [Property tracking],
+  [Apply simple property replacements to selected cells and query the resulting grid state.],
+  [Changed cells store the expected property while unrelated cells remain unchanged.],
 
-  [Play mode tests],
-  [Verify runtime behavior inside Unity scene execution.],
-  [Run generation in a test scene and confirm that the materialized grid contains the expected number of tile objects.],
+  [Rule matching],
+  [Run rule entries with local match definitions against controlled grids containing known property patterns.],
+  [Only anchors that satisfy the configured pattern become valid rule matches.],
 
-  [Regression tests],
-  [Protect previously validated generation behavior from accidental changes.],
-  [Store known seeds and rulebooks as test fixtures and compare later outputs to approved snapshots.]
+  [Prerequisite evaluation],
+  [Run rules with count, coverage, adjacency and subgraph-related prerequisites on prepared grids.],
+  [Rules execute only when their prerequisite conditions are satisfied.],
+
+  [Match selection],
+  [Compare first-match, random-match and apply-all selection policies using the same candidate set.],
+  [The selected matches follow the configured policy and remain repeatable when the seed is fixed.],
+
+  [Rewrite actions],
+  [Apply replacement, shape placement, path drawing and subgraph actions to selected matches.],
+  [The grid is transformed through the mutation gateway and the resulting cell properties match the rule output.],
+
+  [Deterministic generation],
+  [Run the same rulebook several times with the same configuration and seed, then repeat with a different seed.],
+  [The same seed reproduces the same generated map, while different seeds can produce different valid maps.],
+
+  [Materialization],
+  [Generate a map and rebuild the scene representation from the abstract grid.],
+  [Prefabs are instantiated at the expected hex positions and their visual type corresponds to the generated cell property.],
+
+  [Invalid configuration handling],
+  [Remove or misconfigure required assets such as output properties, materialization settings or rule components.],
+  [The framework reports warnings or errors instead of silently producing an invalid map.],
 )
 
-A useful testing technique for this framework is direct grid-state comparison. Since the generated map is stored as a two-dimensional grid with a separate property tracker, tests can compare expected and actual grid states cell by cell. A test fixture can define an expected matrix of property keys, run generation with a fixed topology, rulebook and seed, and then assert that each coordinate contains the expected property.
-For example, a small expected grid can be represented conceptually as:
+The tests most directly covered the core implementation requirements: graph construction, rule matching, rule application, deterministic output and visual feedback in the Unity editor. The no-code configuration requirement was checked by creating and modifying test scenarios through Unity assets and Inspector fields rather than by changing source code for every generated map.
 
-```text
-water water land  land
-water land  land  hill
-land  land  hill  hill
-```
-
-The most important unit tests should target deterministic and algorithmic behavior. Hexagonal grid neighbor lookup should be tested for even rows, odd rows, corners, edges and interior cells. Seed handling should be tested to confirm that the same normalized seed produces the same random sequence and that different salt values produce independent streams. Prerequisites should be tested with controlled grid states to verify property counts, coverage thresholds, distinct property counts and adjacency checks.
-
-Rule matching should also be covered by unit tests. Each match definition should be tested with small hand-built grids where the expected anchors are known. This would confirm that local pattern matching, neighbor-based matching, subgraph matching and global matching return the correct candidates.
-
-Integration tests should cover the full rewriting pipeline. A test should create a topology, initialize a grid, run a small rulebook with a fixed seed and then compare the final property layout against an expected grid. This would verify that the rulebook executor, match resolver, prerequisite evaluator, match selector, rewrite action and mutation gateway interact correctly with one another.
-
-Coverage targets should prioritize the framework core rather than Unity boilerplate. The graph model, seed subsystem, rule execution pipeline, match definitions, prerequisites and mutation services should receive the highest coverage. MonoBehaviour orchestration and purely editor-facing code can be covered with lighter editor or play mode tests.
+The main limitation of this testing approach is that it does not provide automated regression coverage. Repeatable seeds reduced this limitation by making manual regression checks more reliable, but they do not replace a dedicated automated test suite. A future version of the framework should add automated tests for the graph core, rule execution pipeline, deterministic seed handling and selected rewrite actions, while keeping editor-based visual tests for materialization and usability.
 
 == Performance bottlenecks and optimizations
 
@@ -409,42 +431,9 @@ The most important bottleneck is repeated grid traversal. The current implementa
 
 == Deployment
 
-=== CI and configuration management
-
 === Deployment and CI
 
-The project includes a GitHub Actions release pipeline for packaging the framework as a Unity Package Manager package. The workflow runs when a version tag is pushed, using either the `*.*.*` or `*.*.*` format. It can also be started manually through GitHub Actions.
-
-#table(
-  columns: (1fr, 2fr),
-  inset: 6pt,
-  align: (left, left),
-  table.header([*Stage*], [*Purpose*]),
-
-  [Trigger],
-  [Runs on pushed version tags such as `v0.1.0` or `0.1.0`, and through manual workflow dispatch.],
-
-  [Checkout],
-  [Downloads the repository contents into the CI runner.],
-
-  [Package validation],
-  [Runs the PowerShell packaging script and validates the UPM package manifest.],
-
-  [Package assembly],
-  [Copies runtime scripts, demo assets, sample scene and package metadata into a clean UPM folder structure.],
-
-  [Assembly definition],
-  [Generates a `ProcGen.asmdef` file for the runtime package.],
-
-  [Artifact upload],
-  [Creates and uploads a zipped package artifact.],
-
-  [UPM branch publication],
-  [Force-pushes the generated package contents to the `upm-release` branch.],
-
-  [GitHub Release],
-  [Attaches the generated zip file to the GitHub Release for the pushed tag.]
-)
+The project includes a GitHub Actions release pipeline for packaging the framework as a #gls("upm") package. The workflow runs when a version tag is pushed, using either the `*.*.*` or `*.*.*` format. It can also be started manually through GitHub Actions.
 
 The package can be added through the Unity Asset Store.
 Alternatively, users can add the package inside the Unity editor with the project github url:
