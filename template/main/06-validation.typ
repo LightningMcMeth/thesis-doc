@@ -149,7 +149,7 @@ The validation was successful as a proof-of-concept demonstration. The generated
 
 The scenario shows that generated features can interact with game mechanics instead of serving only as visual variation. Terrain resistance affects infection speed, barrier towers create chokepoints, and defensive cells let the player temporarily reshape the spread path. This supports the feasibility of using the framework to generate maps with meaningful gameplay implications.
 
-However, the validation remains preliminary. The game scenario was analyzed through a generated example map, not through a completed playable prototype or formal user study. Therefore, it can show that the map appears suitable for the proposed mechanics, but it cannot prove that the resulting gameplay would be balanced, understandable or engaging for players.
+However, the validation remains preliminary. The game scenario was analyzed through a generated example map, not through a completed playable prototype or formal user study. Therefore, it can show that the map appears suitable for the proposed mechanics, but it cannot prove that the resulting gameplay would be balanced, understandable or engaging for players. The scope of the validation scenario was narrowed due to the resources required for a completed playable game or a formal study.
 
 == System limitations
 
