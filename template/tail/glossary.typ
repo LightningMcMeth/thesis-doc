@@ -98,7 +98,7 @@
     short: "Rewrite action",
     long: "Rewrite action",
     description: "The component that performs the actual grid transformation after a valid match has been selected.",
-    group: "Generation Mmdel"
+    group: "Generation model"
   ),
   (
     key: "subgraph",
@@ -133,6 +133,13 @@
     short: "ScriptableObject",
     long: "Unity ScriptableObject",
     description: "A Unity asset type used to store reusable data and configuration outside scene objects.",
+    group: "Unity implementation"
+  ),
+  (
+    key: "edit-mode",
+    short: "EditMode",
+    long: "Unity EditMode",
+    description: "A Unity test execution mode used for tests that run in the editor without entering Play Mode or requiring a running game scene.",
     group: "Unity implementation"
   ),
   (
@@ -182,7 +189,7 @@
   short: "MonoBehaviour",
   long: "Unity MonoBehaviour",
   description: "A Unity base class used for scripts that are attached to GameObjects and participate in Unity scene execution.",
-  group: "Unity Implementation"
+  group: "Unity implementation"
   ),
 )
 

@@ -314,7 +314,7 @@ Repeatable seeds were also used as a manual quality assurance tool. By keeping t
 
 === Testing coverage
 
-The framework includes a Unity test framework suite. The suite is EditMode only. 
+The framework includes a Unity test framework suite. The suite is #gls("edit-mode") only. 
 Tests mainly focus on:
  + Seeds and random streams.
  + Grid construction.
@@ -332,57 +332,6 @@ Generated grid state is compared directly for test assertion.
 Helpers create test properties, rulebooks, rule entries, random streams and simplified rule execution contexts.
 
 The current suite intentionally does not test materialization, prefab instantiation, scene object creation and MonoBehaviour lifecycle behavior. Generation core is estimated at about 70% test coverage.
-
-#table(
-  columns: (1fr, 1.6fr, 1.6fr),
-  inset: 6pt,
-  align: (left, left, left),
-  table.header([*Test area*], [*Procedure*], [*Expected result*]),
-
-  [Grid construction],
-  [Create small and medium hexagonal grids with known dimensions and inspect generated cell references.],
-  [Every valid coordinate produces one stable cell identifier and can be queried through the graph core.],
-
-  [Neighbor lookup],
-  [Select cells in even and odd rows and compare their neighbor positions against the expected offset layout.],
-  [Neighbor relationships match the visual hexagonal layout and do not return cells outside the grid bounds.],
-
-  [Property tracking],
-  [Apply simple property replacements to selected cells and query the resulting grid state.],
-  [Changed cells store the expected property while unrelated cells remain unchanged.],
-
-  [Rule matching],
-  [Run rule entries with local match definitions against controlled grids containing known property patterns.],
-  [Only anchors that satisfy the configured pattern become valid rule matches.],
-
-  [Prerequisite evaluation],
-  [Run rules with count, coverage, adjacency and subgraph-related prerequisites on prepared grids.],
-  [Rules execute only when their prerequisite conditions are satisfied.],
-
-  [Match selection],
-  [Compare first-match, random-match and apply-all selection policies using the same candidate set.],
-  [The selected matches follow the configured policy and remain repeatable when the seed is fixed.],
-
-  [Rewrite actions],
-  [Apply replacement, shape placement, path drawing and subgraph actions to selected matches.],
-  [The grid is transformed through the mutation gateway and the resulting cell properties match the rule output.],
-
-  [Deterministic generation],
-  [Run the same rulebook several times with the same configuration and seed, then repeat with a different seed.],
-  [The same seed reproduces the same generated map, while different seeds can produce different valid maps.],
-
-  [Materialization],
-  [Generate a map and rebuild the scene representation from the abstract grid.],
-  [Prefabs are instantiated at the expected hex positions and their visual type corresponds to the generated cell property.],
-
-  [Invalid configuration handling],
-  [Remove or misconfigure required assets such as output properties, materialization settings or rule components.],
-  [The framework reports warnings or errors instead of silently producing an invalid map.],
-)
-
-The tests most directly covered the core implementation requirements: graph construction, rule matching, rule application, deterministic output and visual feedback in the Unity editor. The no-code configuration requirement was checked by creating and modifying test scenarios through Unity assets and Inspector fields rather than by changing source code for every generated map.
-
-The main limitation of this testing approach is that it does not provide automated regression coverage. Repeatable seeds reduced this limitation by making manual regression checks more reliable, but they do not replace a dedicated automated test suite. A future version of the framework should add automated tests for the graph core, rule execution pipeline, deterministic seed handling and selected rewrite actions, while keeping editor-based visual tests for materialization and usability.
 
 == Performance bottlenecks and optimizations
 

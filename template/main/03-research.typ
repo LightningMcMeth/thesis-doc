@@ -46,7 +46,7 @@ The following items will be inspected in the reviewed solutions:
 - Unity integration.
 - Cost and accessibility.
 - Learning curve.
-- How wide or narrow the scope of existing solutions is.
+- How wide or narrow the scope of the existing solutions is.
 
 #linebreak()
 

@@ -3,8 +3,6 @@
 #pagebreak()
 = Validation <sec:validation>
 
-== Validation test
-
 === Validation scenario
 
 To validate the framework, an example for a game using this framework was created. The example game emphasises the infuence generation has on gameplay decisions made by players.
